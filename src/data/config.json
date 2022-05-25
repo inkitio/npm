@@ -1,5 +1,5 @@
 {
-  "HOST": "https://api-development.inkit.com/v1",
+  "HOST": "https://api.inkit.com/v1",
   "USER_AGENT":"Inkit SDK",
   "MAX_RETRIES": 3,
   "TIMEOUT": 15
