@@ -24,17 +24,17 @@
       {
         "path": "render/{id}/pdf",
         "httpMethod": "GET",
-        "sdkMethodName": "get_pdf"
+        "sdkMethodName": "getPdf"
       },
       {
         "path": "render/{id}/html",
         "httpMethod": "GET",
-        "sdkMethodName": "get_html"
+        "sdkMethodName": "getHtml"
       },
       {
         "path": "render/{id}/docx",
         "httpMethod": "GET",
-        "sdkMethodName": "get_docx"
+        "sdkMethodName": "getDocx"
       }
     ]
   }
