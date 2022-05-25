@@ -32,7 +32,7 @@ const InkitEntity = {
 };
 
 const buildRequest = (path: string, method: MethodsType, data: any) => {
-  let requestData: { [key: string]: any } = convertCaseKebabCamel(data);
+  let requestData: { [key: string]: any } = { data:  convertCaseKebabCamel(data) };
 
   if (["GET", "DELETE"].includes(method)) {
     requestData = Object.entries(requestData).reduce((acc, [key, value]) => {
@@ -52,7 +52,7 @@ const buildRequest = (path: string, method: MethodsType, data: any) => {
       data,
     };
   }
-  if (["POST", "PATCH"].includes(method)) {
+  if (["POST", "PATCH"].includes(method) && data.html) {
     requestData = {
       data: {
         ...data,
@@ -68,21 +68,27 @@ const setMethods = (type: InkitEntityKeys) => {
   const confKey = type.toLowerCase() as ConfigKeys;
 
   routingConfig[confKey].routes.forEach((route: any) => {
-    InkitEntity[type].prototype[route.sdk_method_name] = async function (
+    InkitEntity[type].prototype[route.sdkMethodName] = async function (
       data: any
     ) {
       try {
         let path = route.path;
 
+        const reqData = buildRequest(path, route.httpMethod, data);
+
         if (path.includes("{id}")) {
           path = route.path.replace("{id}", data.entityId);
+          delete reqData.data.entityId
+        }
+
+        if(!Object.values(reqData.data).length) {
+          delete reqData.data
         }
 
         return await client({
           url: `${config.HOST}/${path}`,
-          method: route.http_method,
-          data: buildRequest(path, route.http_method, data),
-          timeout: config.TIMEOUT,
+          method: route.httpMethod,
+          ...reqData,
           headers: {
             "X-Inkit-API-Token": this.apiToken,
             'User-Agent': config.USER_AGENT,
