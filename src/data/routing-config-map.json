@@ -1,0 +1,41 @@
+{
+  "render": {
+    "routes": [
+      {
+        "path": "render",
+        "httpMethod": "POST",
+        "sdkMethodName": "create"
+      },
+      {
+        "path": "render",
+        "httpMethod": "GET",
+        "sdkMethodName": "list"
+      },
+      {
+        "path": "render/{id}",
+        "httpMethod": "GET",
+        "sdkMethodName": "get"
+      },
+      {
+        "path": "render/{id}",
+        "httpMethod": "DELETE",
+        "sdkMethodName": "delete"
+      },
+      {
+        "path": "render/{id}/pdf",
+        "httpMethod": "GET",
+        "sdkMethodName": "getPdf"
+      },
+      {
+        "path": "render/{id}/html",
+        "httpMethod": "GET",
+        "sdkMethodName": "getHtml"
+      },
+      {
+        "path": "render/{id}/docx",
+        "httpMethod": "GET",
+        "sdkMethodName": "getDocx"
+      }
+    ]
+  }
+}
